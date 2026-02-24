@@ -13,7 +13,14 @@ function PlantPage() {
   useEffect(() => {
     fetch("http://localhost:6001/plants")
       .then((res) => res.json())
-      .then((data) => setPlants(data));
+      .then((data) =>
+  setPlants(
+    data.map((plant) => ({
+      ...plant,
+      inStock: plant.inStock ?? true,
+    }))
+  )
+); 
   }, []);
 
   //adding plant to state
@@ -35,7 +42,7 @@ function PlantPage() {
     <main>
       <NewPlantForm onAddPlant={handleAddPlant}/>
       <Search search={search} setSearch={setSearch} />
-      <PlantList plants={filteredPlants} onUpdatedPlant={handleUpdatePlant}/>
+      <PlantList plants={filteredPlants} onUpdatePlant={handleUpdatePlant}/>
     </main>
   );
 }
