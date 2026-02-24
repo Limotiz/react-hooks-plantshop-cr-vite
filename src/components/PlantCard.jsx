@@ -1,7 +1,8 @@
 import React from "react";
 
 function PlantCard({ plant, onUpdatePlant }) {
-   function handleToggleStock() {
+
+  function handleToggleStock() {
     fetch(`http://localhost:6001/plants/${plant.id}`, {
       method: "PATCH",
       headers: {
@@ -14,18 +15,23 @@ function PlantCard({ plant, onUpdatePlant }) {
       .then((res) => res.json())
       .then((updatedPlant) => onUpdatePlant(updatedPlant));
   }
+
   return (
     <li className="card" data-testid="plant-item">
-      <img src={"https://via.placeholder.com/400"} alt={"plant name"} />
+
+      <img
+        src="https://via.placeholder.com/400"
+        alt="plant name"
+      />
+
       <h4>{plant.name}</h4>
+
       <p>Price: {plant.price}</p>
-      {plant.inStock ? (
-        <button className="primary" onClick={handleToggleStock}>
-          In Stock
-        </button>
-      ) : (
-        <button onClick={handleToggleStock}>Out of Stock</button>
-      )}
+
+      <button onClick={handleToggleStock}>
+        {plant.inStock ? "In Stock" : "Out of Stock"}
+      </button>
+
     </li>
   );
 }

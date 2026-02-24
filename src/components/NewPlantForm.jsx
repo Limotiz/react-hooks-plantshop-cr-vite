@@ -19,9 +19,9 @@ function NewPlantForm({ onAddPlant }) {
     e.preventDefault();
 
     const newPlant = {
-      ...formData,
-      price: parseFloat(formData.price),
-      inStock: true,
+    name: formData.name,
+    image: formData.image,
+    price: formData.price,
     };
 
     fetch("http://localhost:6001/plants", {
